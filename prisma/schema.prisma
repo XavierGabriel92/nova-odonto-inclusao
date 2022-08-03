@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model Company {
+  id Int @id @default(autoincrement())
+  name String
+  cpnj String
+  password String
+  user User[]
+  movimentacaoUser MovimentacaoUser[]
+}
+
+model User {
+  company     Company      @relation(fields: [companyId], references: [id])
+  companyId   Int
+  id Int @id @default(autoincrement())
+  titular String
+  movimento Int
+  matricula String
+  codigoEmpresa Int
+  nome String
+  nascimento DateTime
+  rg String
+  rgExpedicao DateTime
+  rgEmissor String
+  rgUf String
+  cpf String
+  sexo String
+  parentesco Int
+  dataAdimissao DateTime?
+  estadoCivil String
+  cep String
+  logradouro String
+  numero String
+  complemento String?
+  bairro String
+  cidade String
+  estado String
+  fone String
+  plano Int
+  nomeMae String
+  doencasPre String
+  dataVigencia DateTime?
+  dataCancelamento DateTime?
+  email String?
+  celular String?
+  nomePai String?
+  cns String
+  nomeTitular String
+  origemCarencia Int?
+  cid String?
+  movimentacaoUser MovimentacaoUser[]
+}
+
+model MovimentacaoUser {
+  user     User       @relation(fields: [userId], references: [id])
+  userId   Int
+  company     Company      @relation(fields: [companyId], references: [id])
+  companyId   Int
+  id Int @id @default(autoincrement())
+  titular String
+  movimento Int
+  matricula String
+  codigoEmpresa Int
+  nome String
+  nascimento DateTime
+  rg String
+  rgExpedicao DateTime
+  rgEmissor String
+  rgUf String
+  cpf String
+  sexo String
+  parentesco Int
+  dataAdimissao DateTime?
+  estadoCivil String
+  cep String
+  logradouro String
+  numero String
+  complemento String?
+  bairro String
+  cidade String
+  estado String
+  fone String
+  plano Int
+  nomeMae String
+  doencasPre String
+  dataVigencia DateTime?
+  dataCancelamento DateTime?
+  email String?
+  celular String?
+  nomePai String?
+  cns String
+  nomeTitular String
+  origemCarencia Int?
+  cid String?
+  codMotivo String
+  codBeneficiarioDependente String?
+  dataObito DateTime?
+  nroObito String?
+  nroNascido String?
+  dataAposentadoria DateTime?
+}
