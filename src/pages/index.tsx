@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import {
   Flex,
   Input,
@@ -10,24 +10,29 @@ import {
   Box,
   FormControl,
   Image,
-  Spinner,
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import { useAuthContext } from "../context/auth";
 import { AuthBodyRequest } from "../context/auth/types";
+import Router from "next/router";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const Home: NextPage = () => {
   const { register, handleSubmit } = useForm<AuthBodyRequest>();
-  const { singnIn, loading } = useAuthContext();
+  const { singnIn, loading, isAuthenticated } = useAuthContext();
 
   const handleSignIn = (data: AuthBodyRequest) => {
     singnIn(data);
   };
+
+  useEffect(() => {
+    if (isAuthenticated) Router.replace("/users");
+  }, [isAuthenticated]);
+
   return (
     <Flex
       flexDirection="column"
@@ -63,7 +68,7 @@ const Home: NextPage = () => {
                     <CFaUserAlt color="gray.300" />
                   </InputLeftElement>
                   <Input
-                    {...register("cnpj")}
+                    {...register("cpnj")}
                     type="text"
                     placeholder="CPNJ"
                     isRequired

@@ -1,18 +1,18 @@
 import { ReactNode } from "react";
-import { Prisma } from "@prisma/client";
+import { Company } from "@prisma/client";
 
 export type AuthProviderProps = {
   children: ReactNode;
 };
 
 export type AuthContextProps = {
-  company?: Prisma.CompanyScalarFieldEnum;
+  company?: Company;
   isAuthenticated: boolean;
   loading: boolean;
   singnIn: (data: AuthBodyRequest) => void;
 };
 
 export type AuthBodyRequest = {
-  cnpj: string;
+  cpnj: string;
   password: string;
 };

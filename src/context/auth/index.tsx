@@ -1,9 +1,11 @@
-import { createContext, useContext, useState } from "react";
-import axios from "axios";
-import { useToast } from "@chakra-ui/react";
-import { Prisma } from "@prisma/client";
-import { AuthProviderProps, AuthContextProps, AuthBodyRequest } from "./types";
+import { createContext, useContext, useEffect, useState } from "react";
+import { setCookie, parseCookies } from "nookies";
 import { useRouter } from "next/router";
+import { useToast } from "@chakra-ui/react";
+import { Company } from "@prisma/client";
+
+import { AuthProviderProps, AuthContextProps, AuthBodyRequest } from "./types";
+import { api } from "../../utils/axios";
 
 export const AuthContext = createContext<AuthContextProps | null>(null);
 
@@ -12,16 +14,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
-  const [company, setCompany] = useState<Prisma.CompanyScalarFieldEnum>();
+  const [company, setCompany] = useState<Company>();
 
-  // adicionar token no retorno da request
   // useeffect para consumir rota passando o token e retornando dados do usuario
   async function singnIn(data: AuthBodyRequest) {
     setLoading(true);
-    axios
+    api
       .post("/api/company/login", data)
-      .then((res) => {
-        setCompany(res.data);
+      .then(({ data }: any) => {
+        const { company, token } = data;
+        setCompany(company);
+        setCookie(undefined, "nextauth.token", token, {
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+        });
         router.push("/users");
       })
       .catch(() =>
@@ -35,6 +40,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
       )
       .finally(() => setLoading(false));
   }
+
+  useEffect(() => {
+    const { "nextauth.token": token } = parseCookies();
+
+    if (token) {
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      api.get("/api/company/get").then(({ data }: any) => {
+        const { company } = data;
+        setCompany(company);
+      });
+    }
+  }, []);
 
   const value = {
     company,
