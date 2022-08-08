@@ -1,13 +1,12 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE `Company` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `cpnj` VARCHAR(191) NOT NULL,
+    `password` VARCHAR(191) NOT NULL,
 
-  - You are about to alter the column `name` on the `Company` table. The data in that column could be lost. The data in that column will be cast from `VarChar(255)` to `VarChar(191)`.
-  - Added the required column `cpnj` to the `Company` table without a default value. This is not possible if the table is not empty.
-
-*/
--- AlterTable
-ALTER TABLE `Company` ADD COLUMN `cpnj` VARCHAR(191) NOT NULL,
-    MODIFY `name` VARCHAR(191) NOT NULL;
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `User` (
@@ -18,15 +17,15 @@ CREATE TABLE `User` (
     `matricula` VARCHAR(191) NOT NULL,
     `codigoEmpresa` INTEGER NOT NULL,
     `nome` VARCHAR(191) NOT NULL,
-    `nascimento` DATETIME(3) NOT NULL,
-    `rg` VARCHAR(191) NOT NULL,
-    `rgExpedicao` DATETIME(3) NOT NULL,
-    `rgEmissor` VARCHAR(191) NOT NULL,
-    `rgUf` VARCHAR(191) NOT NULL,
+    `nascimento` DATE NOT NULL,
+    `rg` VARCHAR(191) NULL,
+    `rgExpedicao` DATE NOT NULL,
+    `rgEmissor` VARCHAR(191) NULL,
+    `rgUf` VARCHAR(191) NULL,
     `cpf` VARCHAR(191) NOT NULL,
     `sexo` VARCHAR(191) NOT NULL,
-    `parentesco` INTEGER NOT NULL,
-    `dataAdimissao` DATETIME(3) NULL,
+    `parentesco` INTEGER NULL,
+    `dataAdimissao` DATE NULL,
     `estadoCivil` VARCHAR(191) NOT NULL,
     `cep` VARCHAR(191) NOT NULL,
     `logradouro` VARCHAR(191) NOT NULL,
@@ -35,19 +34,22 @@ CREATE TABLE `User` (
     `bairro` VARCHAR(191) NOT NULL,
     `cidade` VARCHAR(191) NOT NULL,
     `estado` VARCHAR(191) NOT NULL,
-    `fone` VARCHAR(191) NOT NULL,
+    `fone` VARCHAR(191) NULL,
     `plano` INTEGER NOT NULL,
     `nomeMae` VARCHAR(191) NOT NULL,
-    `doencasPre` VARCHAR(191) NOT NULL,
-    `dataVigencia` DATETIME(3) NULL,
-    `dataCancelamento` DATETIME(3) NULL,
+    `doencasPre` VARCHAR(191) NULL,
+    `dataVigencia` DATE NULL,
+    `dataCancelamento` DATE NULL,
     `email` VARCHAR(191) NULL,
     `celular` VARCHAR(191) NULL,
     `nomePai` VARCHAR(191) NULL,
-    `cns` VARCHAR(191) NOT NULL,
+    `cns` VARCHAR(191) NULL,
     `nomeTitular` VARCHAR(191) NOT NULL,
     `origemCarencia` INTEGER NULL,
     `cid` VARCHAR(191) NULL,
+    `status` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -62,15 +64,15 @@ CREATE TABLE `MovimentacaoUser` (
     `matricula` VARCHAR(191) NOT NULL,
     `codigoEmpresa` INTEGER NOT NULL,
     `nome` VARCHAR(191) NOT NULL,
-    `nascimento` DATETIME(3) NOT NULL,
+    `nascimento` DATE NOT NULL,
     `rg` VARCHAR(191) NOT NULL,
-    `rgExpedicao` DATETIME(3) NOT NULL,
+    `rgExpedicao` DATE NOT NULL,
     `rgEmissor` VARCHAR(191) NOT NULL,
     `rgUf` VARCHAR(191) NOT NULL,
     `cpf` VARCHAR(191) NOT NULL,
     `sexo` VARCHAR(191) NOT NULL,
     `parentesco` INTEGER NOT NULL,
-    `dataAdimissao` DATETIME(3) NULL,
+    `dataAdimissao` DATE NULL,
     `estadoCivil` VARCHAR(191) NOT NULL,
     `cep` VARCHAR(191) NOT NULL,
     `logradouro` VARCHAR(191) NOT NULL,
@@ -83,8 +85,8 @@ CREATE TABLE `MovimentacaoUser` (
     `plano` INTEGER NOT NULL,
     `nomeMae` VARCHAR(191) NOT NULL,
     `doencasPre` VARCHAR(191) NOT NULL,
-    `dataVigencia` DATETIME(3) NULL,
-    `dataCancelamento` DATETIME(3) NULL,
+    `dataVigencia` DATE NULL,
+    `dataCancelamento` DATE NULL,
     `email` VARCHAR(191) NULL,
     `celular` VARCHAR(191) NULL,
     `nomePai` VARCHAR(191) NULL,
@@ -94,10 +96,12 @@ CREATE TABLE `MovimentacaoUser` (
     `cid` VARCHAR(191) NULL,
     `codMotivo` VARCHAR(191) NOT NULL,
     `codBeneficiarioDependente` VARCHAR(191) NULL,
-    `dataObito` DATETIME(3) NULL,
+    `dataObito` DATE NULL,
     `nroObito` VARCHAR(191) NULL,
     `nroNascido` VARCHAR(191) NULL,
-    `dataAposentadoria` DATETIME(3) NULL,
+    `dataAposentadoria` DATE NULL,
+    `status` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

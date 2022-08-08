@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
 import { prisma } from "../../../utils/prisma";
 import { decode } from "querystring";
+import { decodeToken } from "../../../utils/decodeToken";
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,13 +11,14 @@ export default async function handler(
 ) {
   try {
     const { authorization } = req.headers;
-    var decoded = jwt.verify(authorization!.replace("Bearer ", ""), "superkey");
+    if (authorization) {
+      var company = decodeToken({ authorization });
 
-    const company = (decoded as any).company;
-
-    return res.status(200).json({
-      company,
-    });
+      return res.status(200).json({
+        company,
+      });
+    }
+    throw Error("Cant find token");
   } catch (e) {
     res.status(404).json({
       msg: "Cpnj/password invalidos",

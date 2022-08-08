@@ -1,27 +1,28 @@
 import {
   Box,
+  Button,
   Center,
-  Stack,
+  Flex,
+  Spacer,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
-  Tfoot,
   Th,
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import type { NextPage } from "next";
-import { useEffect } from "react";
+import { User } from "@prisma/client";
+import type { GetServerSideProps, NextPage } from "next";
+import { parseCookies } from "nookies";
+import { decodeToken } from "../../utils/decodeToken";
+import { prisma } from "../../utils/prisma";
 
-const ListUsersPage: NextPage = () => {
-  // useEffect(() => {
-  //   fetch("/api/users/create")
-  //     .then((res) => res.json())
-  //     .then((res) => console.log(res));
-  // }, []);
+type Props = {
+  users: User[];
+};
 
+const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
   return (
     <Center marginTop="50px">
       <Box
@@ -30,31 +31,90 @@ const ListUsersPage: NextPage = () => {
         justifyContent="center"
         justifyItems="center"
       >
+        <Flex>
+          <Spacer />
+          <Box p="4">
+            <Button colorScheme="teal" size="xs">
+              Incluir novo usuário
+            </Button>
+          </Box>
+        </Flex>
         <TableContainer>
           <Table variant="simple" size="sm">
             <Thead>
               <Tr>
                 <Th>Nome</Th>
-                <Th>Titular</Th>
-                <Th>Nascimento</Th>
                 <Th>Matricula</Th>
-                <Th>Email</Th>
+                <Th>Data Cadastro</Th>
+                <Th>Dependente</Th>
+                <Th>Documentacao</Th>
+                <Th>Status</Th>
+                <Th>Ação</Th>
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>inches</Td>
-                <Td>millimetres (mm)</Td>
-                <Td>millimetres (mm)</Td>
-                <Td>millimetres (mm)</Td>
-                <Td>millimetres (mm)</Td>
-              </Tr>
+              {users.map((user) => (
+                <Tr key={user.id}>
+                  <Td>{user.nome}</Td>
+                  <Td>{user.matricula}</Td>
+                  <Td>{user.createdAt.toString()}</Td>
+                  <Td>{user.titular}</Td>
+                  <Td>{user.cpf}</Td>
+                  <Td>{user.status}</Td>
+                  <Td>
+                    <Flex>
+                      <Box marginRight="4">
+                        <Button colorScheme="blue" size="xs">
+                          Editar
+                        </Button>
+                      </Box>
+                      <Box>
+                        <Button colorScheme="red" size="xs">
+                          Excluir
+                        </Button>
+                      </Box>
+                    </Flex>
+                  </Td>
+                </Tr>
+              ))}
             </Tbody>
           </Table>
         </TableContainer>
       </Box>
     </Center>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { ["nextauth.token"]: token } = parseCookies(context);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  const company = decodeToken({ authorization: token });
+
+  let users = await prisma.user.findMany({
+    where: {
+      companyId: company.id,
+    },
+  });
+
+  users = users.map((user) => ({
+    ...user,
+    status: user.status === "a" ? "Ativo" : "Inclusão",
+  }));
+
+  return {
+    props: {
+      users: JSON.parse(JSON.stringify(users)),
+    },
+  };
 };
 
 export default ListUsersPage;
