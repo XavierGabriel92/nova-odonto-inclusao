@@ -6,7 +6,7 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
-import type { Prisma, User } from "@prisma/client";
+import type { User } from "@prisma/client";
 import { UseFormRegister } from "react-hook-form";
 
 type Props = {

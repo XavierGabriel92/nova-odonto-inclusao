@@ -1,8 +1,8 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Spacer } from "@chakra-ui/react";
 import { useAuthContext } from "../context/auth";
 
 const Header = () => {
-  const { isAuthenticated, company } = useAuthContext();
+  const { isAuthenticated, company, singOut } = useAuthContext();
 
   return (
     <>
@@ -16,7 +16,20 @@ const Header = () => {
           zIndex={1}
           marginBottom={6}
         >
-          {company?.name}
+          <Flex alignItems="center">
+            <Heading as="h5" size="sm">
+              {company?.name}
+            </Heading>
+            <Spacer />
+            <Button
+              size="sm"
+              onClick={singOut}
+              colorScheme="white"
+              variant="outline"
+            >
+              Sair
+            </Button>
+          </Flex>
         </Box>
       )}
     </>

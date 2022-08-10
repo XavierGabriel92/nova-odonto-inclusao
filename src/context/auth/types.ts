@@ -10,6 +10,7 @@ export type AuthContextProps = {
   isAuthenticated: boolean;
   loading: boolean;
   singnIn: (data: AuthBodyRequest) => void;
+  singOut: () => void;
 };
 
 export type AuthBodyRequest = {

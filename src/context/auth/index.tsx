@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { setCookie, parseCookies } from "nookies";
+import { setCookie, parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/router";
 import { useToast } from "@chakra-ui/react";
 import { Company } from "@prisma/client";
@@ -41,6 +41,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       .finally(() => setLoading(false));
   }
 
+  const singOut = () => {
+    destroyCookie({}, "nextauth.token");
+    router.push("/");
+  };
+
   useEffect(() => {
     const { "nextauth.token": token } = parseCookies();
 
@@ -58,6 +63,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     isAuthenticated: !!company,
     loading,
     singnIn,
+    singOut,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
