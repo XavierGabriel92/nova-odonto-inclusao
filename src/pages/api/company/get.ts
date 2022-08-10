@@ -1,8 +1,4 @@
-import { Prisma } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import jwt from "jsonwebtoken";
-import { prisma } from "../../../utils/prisma";
-import { decode } from "querystring";
 import { decodeToken } from "../../../utils/decodeToken";
 
 export default async function handler(

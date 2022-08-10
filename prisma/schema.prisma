@@ -25,11 +25,10 @@ model User {
   id               Int                @id @default(autoincrement())
   titular          String
   matricula        String
-  codigoEmpresa    Int
   nome             String
   nascimento       DateTime   @db.Date
   rg               String?
-  rgExpedicao      DateTime   @db.Date
+  rgExpedicao      DateTime?   @db.Date
   rgEmissor        String?
   rgUf             String?
   cpf              String
@@ -49,15 +48,21 @@ model User {
   nomeMae          String
   doencasPre       String?
   dataVigencia     DateTime?   @db.Date
-  dataCancelamento DateTime?   @db.Date
-  email            String?
-  celular          String?
-  nomePai          String?
-  cns              String?
-  nomeTitular      String
-  origemCarencia   Int?
-  cid              String?
-  status           String
+  dataCancelamento          DateTime?   @db.Date
+  email                     String?
+  celular                   String?
+  nomePai                   String?
+  cns                       String
+  nomeTitular               String
+  origemCarencia            Int?
+  cid                       String?
+  status                    String
+  codMotivo                 String?
+  codBeneficiarioDependente String?
+  dataObito                 DateTime?   @db.Date
+  nroObito                  String?
+  nroNascido                String?
+  dataAposentadoria         DateTime?   @db.Date
   movimentacaoUser MovimentacaoUser[]
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
@@ -72,16 +77,15 @@ model MovimentacaoUser {
   titular                   String
   movimento                 Int
   matricula                 String
-  codigoEmpresa             Int
   nome                      String
   nascimento                DateTime   @db.Date
-  rg                        String
-  rgExpedicao               DateTime   @db.Date
-  rgEmissor                 String
-  rgUf                      String
+  rg                        String?
+  rgExpedicao               DateTime?   @db.Date
+  rgEmissor                 String?
+  rgUf                      String?
   cpf                       String
   sexo                      String
-  parentesco                Int
+  parentesco                Int?
   dataAdimissao             DateTime?   @db.Date
   estadoCivil               String
   cep                       String
@@ -91,10 +95,10 @@ model MovimentacaoUser {
   bairro                    String
   cidade                    String
   estado                    String
-  fone                      String
+  fone                      String?
   plano                     Int
   nomeMae                   String
-  doencasPre                String
+  doencasPre                String?
   dataVigencia              DateTime?   @db.Date
   dataCancelamento          DateTime?   @db.Date
   email                     String?
@@ -104,12 +108,12 @@ model MovimentacaoUser {
   nomeTitular               String
   origemCarencia            Int?
   cid                       String?
-  codMotivo                 String
+  status                    String
+  codMotivo                 String?
   codBeneficiarioDependente String?
   dataObito                 DateTime?   @db.Date
   nroObito                  String?
   nroNascido                String?
   dataAposentadoria         DateTime?   @db.Date
-  status                    String
   createdAt                 DateTime           @default(now())
 }
