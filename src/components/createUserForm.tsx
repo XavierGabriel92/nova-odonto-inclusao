@@ -6,11 +6,11 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
-import { Prisma } from "@prisma/client";
+import type { Prisma, User } from "@prisma/client";
 import { UseFormRegister } from "react-hook-form";
 
 type Props = {
-  register: UseFormRegister<Omit<Prisma.UserCreateInput, "company" | "status">>;
+  register: UseFormRegister<Omit<User, "companyId" | "status">>;
   loading: boolean;
 };
 
@@ -271,11 +271,7 @@ const CreateUserForm = ({ register, loading }: Props) => {
         <GridItem>
           <FormControl isDisabled={loading}>
             <FormLabel>Telefone</FormLabel>
-            <Input
-              {...register("telefone")}
-              type="text"
-              placeholder="Telefone"
-            />
+            <Input {...register("fone")} type="text" placeholder="Telefone" />
           </FormControl>
         </GridItem>
         <GridItem>

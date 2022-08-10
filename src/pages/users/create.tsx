@@ -11,7 +11,7 @@ import {
   Heading,
   useToast,
 } from "@chakra-ui/react";
-import { Prisma } from "@prisma/client";
+import { User } from "@prisma/client";
 import { api } from "../../utils/axios";
 
 import CreateUserForm from "../../components/createUserForm";
@@ -25,11 +25,9 @@ const CreateUsersPage: NextPage = () => {
   const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, reset } =
-    useForm<Omit<Prisma.UserCreateInput, "company" | "status">>();
+    useForm<Omit<User, "companyId" | "status">>();
 
-  const handleSignIn = (
-    data: Omit<Prisma.UserCreateInput, "company" | "status">
-  ) => {
+  const handleSignIn = (data: Omit<User, "companyId" | "status">) => {
     const filterData = clean(data);
     setLoading(true);
 
