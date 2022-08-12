@@ -25,7 +25,6 @@ type Props = {
 };
 
 const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
-  console.log(user);
   const toast = useToast();
   const router = useRouter();
 

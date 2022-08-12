@@ -1,7 +1,6 @@
 import type { AppProps } from "next/app";
 import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { AuthProvider } from "../context/auth";
-import "react-datepicker/dist/react-datepicker.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
