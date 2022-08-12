@@ -22,7 +22,7 @@ export default async function handler(
       id: requestUser.id,
     },
     data: {
-      status: "SE",
+      status: "SA",
     },
   });
 

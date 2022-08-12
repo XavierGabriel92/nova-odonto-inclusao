@@ -38,13 +38,20 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
     },
   });
 
-  const handleSignIn = (data: Omit<User, "companyId" | "status">) => {
+  const handleUpdateUser = (data: Omit<User, "companyId" | "status">) => {
     const filterData = clean(data);
     setLoading(true);
 
     api
       .post("/api/usersDraft/update", filterData)
       .then(() => {
+        toast({
+          title: "Usuario alterado com sucesso",
+          description: "Usuario alterado com sucesso",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
         router.push("/usersDraft");
       })
       .catch(() =>
@@ -74,11 +81,8 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
           <Heading as="h3" size="lg" marginBottom={6}>
             Editar Beneficiario
           </Heading>
-          <form onSubmit={handleSubmit(handleSignIn)}>
-            <CreateUserForm
-              register={register}
-              loading={loading}
-            ></CreateUserForm>
+          <form onSubmit={handleSubmit(handleUpdateUser)}>
+            <CreateUserForm register={register} loading={loading} />
             <Flex marginTop={4}>
               <Box>
                 <Button
@@ -102,7 +106,7 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
                   size="sm"
                   isLoading={loading}
                 >
-                  Incluir usuário
+                  Alterar usuário
                 </Button>
               </Box>
             </Flex>

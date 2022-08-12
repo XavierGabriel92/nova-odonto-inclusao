@@ -32,7 +32,7 @@ type Props = {
 
 const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
   const [filterUsers, setFilterUsers] = useState(users);
-  const [loading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const toast = useToast();
 
@@ -145,7 +145,7 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
                           <Button
                             colorScheme="blue"
                             size="xs"
-                            isLoading={loading}
+                            isLoading={isLoading}
                             onClick={() =>
                               router.push(`/usersDraft/${user.id}`)
                             }
@@ -158,9 +158,9 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
                             buttonColor="red"
                             mr={4}
                             size="xs"
-                            buttonText="Excluir"
-                            message="Deseja excluir beneficiario da lista de inclusão?"
-                            isLoading={loading}
+                            buttonText="Remover"
+                            message="Deseja Remover beneficiario da lista de inclusão?"
+                            isLoading={isLoading}
                             onClick={() => handleDeleteUser(user.id)}
                           />
                         </Box>
@@ -196,10 +196,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       companyId: company.id,
     },
   });
-
-  users = users.map((user) => ({
-    ...user,
-  }));
 
   return {
     props: {

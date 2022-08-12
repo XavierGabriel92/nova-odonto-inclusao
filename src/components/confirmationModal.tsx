@@ -19,7 +19,8 @@ type Props = {
   size?: string;
   message?: string;
   isLoading?: boolean;
-  onClick: () => void;
+  type?: "button" | "submit" | "reset" | undefined;
+  onClick: (args?: any) => void;
 };
 
 const ConfirmationModal = ({
@@ -30,6 +31,7 @@ const ConfirmationModal = ({
   size = "sm",
   isLoading = false,
   message = "Confirmar ação",
+  type = "button",
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -67,7 +69,7 @@ const ConfirmationModal = ({
               Cancelar
             </Button>
             <Spacer />
-            <Button colorScheme="teal" onClick={handleConfirm}>
+            <Button type={type} colorScheme="teal" onClick={handleConfirm}>
               Confirmar
             </Button>
           </ModalFooter>

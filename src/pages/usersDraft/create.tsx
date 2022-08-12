@@ -27,7 +27,7 @@ const CreateUsersPage: NextPage = () => {
   const { register, handleSubmit } =
     useForm<Omit<User, "companyId" | "status">>();
 
-  const handleSignIn = (data: Omit<User, "companyId" | "status">) => {
+  const handleCreateUser = (data: Omit<User, "companyId" | "status">) => {
     const filterData = clean(data);
     setLoading(true);
 
@@ -63,7 +63,7 @@ const CreateUsersPage: NextPage = () => {
           <Heading as="h3" size="lg" marginBottom={6}>
             Inclusão de Beneficiario
           </Heading>
-          <form onSubmit={handleSubmit(handleSignIn)}>
+          <form onSubmit={handleSubmit(handleCreateUser)}>
             <CreateUserForm
               register={register}
               loading={loading}
