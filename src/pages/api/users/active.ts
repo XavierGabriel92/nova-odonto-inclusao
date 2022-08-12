@@ -33,7 +33,7 @@ export default async function handler(
   await prisma.movimentacaoUser.create({
     data: {
       ...user,
-      movimento: 3,
+      movimento: 2,
       companyId: company.id,
       userId: requestUser.id,
     },
