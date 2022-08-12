@@ -12,65 +12,53 @@ export default async function handler(
   if (!authorization) throw Error("Cant find token");
   var company = decodeToken({ authorization });
 
-  const requestUser = req.body as Omit<
-    Prisma.UserCreateInput,
-    "company" | "status"
-  >;
-
-  const user = await prisma.user.create({
-    data: {
-      ...requestUser,
+  let draftUsers = await prisma.userDraft.findMany({
+    where: {
       companyId: company.id,
-      origemCarencia: Number(requestUser.origemCarencia),
-      parentesco: requestUser.parentesco
-        ? Number(requestUser.parentesco)
-        : null,
-      dataVigencia:
-        requestUser.dataVigencia && new Date(requestUser.dataVigencia),
-      dataCancelamento:
-        requestUser.dataCancelamento && new Date(requestUser.dataCancelamento),
-      dataObito: requestUser.dataObito && new Date(requestUser.dataObito),
-      dataAposentadoria:
-        requestUser.dataAposentadoria &&
-        new Date(requestUser.dataAposentadoria),
-      nascimento: requestUser.nascimento && new Date(requestUser.nascimento),
-      rgExpedicao: requestUser.rgExpedicao && new Date(requestUser.rgExpedicao),
-      dataAdimissao:
-        requestUser.dataAdimissao && new Date(requestUser.dataAdimissao),
-      plano: Number(requestUser.plano),
-      status: "I",
     },
   });
 
-  const logUser = await prisma.movimentacaoUser.create({
-    data: {
-      ...requestUser,
+  draftUsers = draftUsers.map((user) => ({
+    ...user,
+    companyId: company.id,
+    origemCarencia: Number(user.origemCarencia),
+    parentesco: user.parentesco ? Number(user.parentesco) : null,
+    dataVigencia: user.dataVigencia && new Date(user.dataVigencia),
+    dataCancelamento: user.dataCancelamento && new Date(user.dataCancelamento),
+    dataObito: user.dataObito && new Date(user.dataObito),
+    dataAposentadoria:
+      user.dataAposentadoria && new Date(user.dataAposentadoria),
+    nascimento: user.nascimento && new Date(user.nascimento),
+    rgExpedicao: user.rgExpedicao && new Date(user.rgExpedicao),
+    dataAdimissao: user.dataAdimissao && new Date(user.dataAdimissao),
+    plano: Number(user.plano),
+    status: "I",
+  }));
+
+  draftUsers.forEach(async (user) => {
+    const { updatedAt, createdAt, id, ...rest } = user;
+    const newUser = await prisma.user.create({
+      data: {
+        ...rest,
+      },
+    });
+
+    const logUser = await prisma.movimentacaoUser.create({
+      data: {
+        ...rest,
+        movimento: 1,
+        userId: newUser.id,
+      },
+    });
+  });
+
+  await prisma.userDraft.deleteMany({
+    where: {
       companyId: company.id,
-      origemCarencia: Number(requestUser.origemCarencia),
-      parentesco: requestUser.parentesco
-        ? Number(requestUser.parentesco)
-        : null,
-      dataVigencia:
-        requestUser.dataVigencia && new Date(requestUser.dataVigencia),
-      dataCancelamento:
-        requestUser.dataCancelamento && new Date(requestUser.dataCancelamento),
-      dataObito: requestUser.dataObito && new Date(requestUser.dataObito),
-      dataAposentadoria:
-        requestUser.dataAposentadoria &&
-        new Date(requestUser.dataAposentadoria),
-      nascimento: requestUser.nascimento && new Date(requestUser.nascimento),
-      rgExpedicao: requestUser.rgExpedicao && new Date(requestUser.rgExpedicao),
-      dataAdimissao:
-        requestUser.dataAdimissao && new Date(requestUser.dataAdimissao),
-      plano: Number(requestUser.plano),
-      status: "I",
-      movimento: 1,
-      userId: user.id,
     },
   });
 
   return res.status(200).json({
-    msg: "User created",
-    user,
+    msg: "Users created",
   });
 }

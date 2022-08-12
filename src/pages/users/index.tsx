@@ -41,14 +41,14 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
           <Flex>
             <Spacer />
             <Box p="4">
-              <Button
+              {/* <Button
                 type="button"
                 colorScheme="teal"
                 size="xs"
                 onClick={() => router.push("/users/create")}
               >
                 Incluir novo usuário
-              </Button>
+              </Button> */}
             </Box>
           </Flex>
           <TableContainer>

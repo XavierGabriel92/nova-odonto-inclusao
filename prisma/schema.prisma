@@ -16,6 +16,7 @@ model Company {
   cpnj             String
   password         String
   user             User[]
+  userDraft             UserDraft[]
   movimentacaoUser MovimentacaoUser[]
 }
 
@@ -52,7 +53,7 @@ model User {
   email                     String?
   celular                   String?
   nomePai                   String?
-  cns                       String
+  cns                       String?
   nomeTitular               String
   origemCarencia            Int?
   cid                       String?
@@ -104,7 +105,7 @@ model MovimentacaoUser {
   email                     String?
   celular                   String?
   nomePai                   String?
-  cns                       String
+  cns                       String?
   nomeTitular               String
   origemCarencia            Int?
   cid                       String?
@@ -115,5 +116,54 @@ model MovimentacaoUser {
   nroObito                  String?
   nroNascido                String?
   dataAposentadoria         DateTime?   @db.Date
+  baixado                   Boolean?
   createdAt                 DateTime           @default(now())
+}
+
+model UserDraft {
+  company          Company            @relation(fields: [companyId], references: [id])
+  companyId        Int
+  id               Int                @id @default(autoincrement())
+  titular          String
+  matricula        String
+  nome             String
+  nascimento       DateTime   @db.Date
+  rg               String?
+  rgExpedicao      DateTime?   @db.Date
+  rgEmissor        String?
+  rgUf             String?
+  cpf              String
+  sexo             String
+  parentesco       Int?
+  dataAdimissao    DateTime?   @db.Date
+  estadoCivil      String
+  cep              String
+  logradouro       String
+  numero           String
+  complemento      String?
+  bairro           String
+  cidade           String
+  estado           String
+  fone             String?
+  plano            Int
+  nomeMae          String
+  doencasPre       String?
+  dataVigencia     DateTime?   @db.Date
+  dataCancelamento          DateTime?   @db.Date
+  email                     String?
+  celular                   String?
+  nomePai                   String?
+  cns                       String?
+  nomeTitular               String
+  origemCarencia            Int?
+  cid                       String?
+  status                    String
+  codMotivo                 String?
+  codBeneficiarioDependente String?
+  dataObito                 DateTime?   @db.Date
+  nroObito                  String?
+  nroNascido                String?
+  dataAposentadoria         DateTime?   @db.Date
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
 }

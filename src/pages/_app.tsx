@@ -1,8 +1,7 @@
 import type { AppProps } from "next/app";
-import { Box, ChakraProvider, Flex } from "@chakra-ui/react";
-import { AuthProvider, AuthContext } from "../context/auth";
-import { NextPage } from "next";
-import { ReactElement, ReactNode } from "react";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
+import { AuthProvider } from "../context/auth";
+import "react-datepicker/dist/react-datepicker.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

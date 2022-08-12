@@ -307,7 +307,7 @@ const CreateUserForm = ({ register, loading }: Props) => {
         <GridItem>
           <FormControl isDisabled={loading}>
             <FormLabel>Doenças Pré-Existentes</FormLabel>
-            <Select {...register("doencasPre")}>
+            <Select {...register("doencasPre")} placeholder=" ">
               <option value="N">Não tem</option>
               <option value="C">CPT - cobertura parcial termporária</option>
               <option value="A">Agravo</option>
@@ -326,7 +326,7 @@ const CreateUserForm = ({ register, loading }: Props) => {
         </GridItem>
 
         <GridItem>
-          <FormControl isDisabled={loading} isRequired>
+          <FormControl isDisabled={loading}>
             <FormLabel>CNS</FormLabel>
             <Input {...register("cns")} type="text" placeholder="CNS" />
           </FormControl>
