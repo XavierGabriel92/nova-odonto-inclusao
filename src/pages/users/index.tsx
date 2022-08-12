@@ -3,6 +3,7 @@ import {
   Button,
   Center,
   Flex,
+  Heading,
   Spacer,
   Table,
   TableContainer,
@@ -39,6 +40,9 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
           justifyItems="center"
         >
           <Flex>
+            <Heading as="h3" size="lg" marginBottom={6} p={4}>
+              Inclusão de Beneficiario
+            </Heading>
             <Spacer />
             <Box p="4">
               {/* <Button
