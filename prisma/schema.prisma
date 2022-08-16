@@ -17,7 +17,6 @@ model Company {
   password         String
   user             User[]
   userDraft             UserDraft[]
-  movimentacaoUser MovimentacaoUser[]
 }
 
 model User {
@@ -27,15 +26,15 @@ model User {
   titular          String
   matricula        String
   nome             String
-  nascimento       DateTime   @db.Date
+  nascimento       String   
   rg               String?
-  rgExpedicao      DateTime?   @db.Date
+  rgExpedicao      String?  
   rgEmissor        String?
   rgUf             String?
   cpf              String
   sexo             String
-  parentesco       Int?
-  dataAdimissao    DateTime?   @db.Date
+  parentesco       String?
+  dataAdimissao    String?   
   estadoCivil      String
   cep              String
   logradouro       String
@@ -45,79 +44,28 @@ model User {
   cidade           String
   estado           String
   fone             String?
-  plano            Int
+  plano            String
   nomeMae          String
   doencasPre       String?
-  dataVigencia     DateTime?   @db.Date
-  dataCancelamento          DateTime?   @db.Date
+  dataVigencia     String?   
+  dataCancelamento          String?   
   email                     String?
   celular                   String?
   nomePai                   String?
   cns                       String?
   nomeTitular               String
-  origemCarencia            Int?
+  movimento                 String
+  origemCarencia            String?
   cid                       String?
   status                    String
   codMotivo                 String?
   codBeneficiarioDependente String?
-  dataObito                 DateTime?   @db.Date
+  dataObito                 String?   
   nroObito                  String?
   nroNascido                String?
-  dataAposentadoria         DateTime?   @db.Date
-  movimentacaoUser MovimentacaoUser[]
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-}
-
-model MovimentacaoUser {
-  user                      User      @relation(fields: [userId], references: [id])
-  userId                    Int
-  company                   Company   @relation(fields: [companyId], references: [id])
-  companyId                 Int
-  id                        Int       @id @default(autoincrement())
-  titular                   String
-  movimento                 Int
-  matricula                 String
-  nome                      String
-  nascimento                DateTime   @db.Date
-  rg                        String?
-  rgExpedicao               DateTime?   @db.Date
-  rgEmissor                 String?
-  rgUf                      String?
-  cpf                       String
-  sexo                      String
-  parentesco                Int?
-  dataAdimissao             DateTime?   @db.Date
-  estadoCivil               String
-  cep                       String
-  logradouro                String
-  numero                    String
-  complemento               String?
-  bairro                    String
-  cidade                    String
-  estado                    String
-  fone                      String?
-  plano                     Int
-  nomeMae                   String
-  doencasPre                String?
-  dataVigencia              DateTime?   @db.Date
-  dataCancelamento          DateTime?   @db.Date
-  email                     String?
-  celular                   String?
-  nomePai                   String?
-  cns                       String?
-  nomeTitular               String
-  origemCarencia            Int?
-  cid                       String?
-  status                    String
-  codMotivo                 String?
-  codBeneficiarioDependente String?
-  dataObito                 DateTime?   @db.Date
-  nroObito                  String?
-  nroNascido                String?
-  dataAposentadoria         DateTime?   @db.Date
-  baixado                   Boolean?
-  createdAt                 DateTime           @default(now())
+  dataAposentadoria         String?   
+  createdAt        String           
+  updatedAt        String           
 }
 
 model UserDraft {
@@ -127,15 +75,15 @@ model UserDraft {
   titular          String
   matricula        String
   nome             String
-  nascimento       DateTime   @db.Date
+  nascimento       String
   rg               String?
-  rgExpedicao      DateTime?   @db.Date
+  rgExpedicao      String?
   rgEmissor        String?
   rgUf             String?
   cpf              String
   sexo             String
-  parentesco       Int?
-  dataAdimissao    DateTime?   @db.Date
+  parentesco       String?
+  dataAdimissao    String?
   estadoCivil      String
   cep              String
   logradouro       String
@@ -145,25 +93,25 @@ model UserDraft {
   cidade           String
   estado           String
   fone             String?
-  plano            Int
+  plano            String
   nomeMae          String
   doencasPre       String?
-  dataVigencia     DateTime?   @db.Date
-  dataCancelamento          DateTime?   @db.Date
+  dataVigencia     String? 
+  dataCancelamento          String? 
   email                     String?
   celular                   String?
   nomePai                   String?
   cns                       String?
   nomeTitular               String
-  origemCarencia            Int?
+  origemCarencia            String?
   cid                       String?
   status                    String
   codMotivo                 String?
   codBeneficiarioDependente String?
-  dataObito                 DateTime?   @db.Date
+  dataObito                 String?
   nroObito                  String?
   nroNascido                String?
-  dataAposentadoria         DateTime?   @db.Date
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
+  dataAposentadoria         String? 
+  createdAt        String
+  updatedAt        String
 }

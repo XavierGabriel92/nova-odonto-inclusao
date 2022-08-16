@@ -6,15 +6,19 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
+import InputMask from "react-input-mask";
 import type { User } from "@prisma/client";
 import { UseFormRegister } from "react-hook-form";
 
 type Props = {
   register: UseFormRegister<Omit<User, "companyId" | "status">>;
   loading: boolean;
+  watch?: (params: any) => any;
 };
 
-const CreateUserForm = ({ register, loading }: Props) => {
+const CreateUserForm = ({ register, loading, watch }: Props) => {
+  const checkParentesco = watch("titular") === "D";
+
   const spacing = 4;
   return (
     <>
@@ -43,7 +47,7 @@ const CreateUserForm = ({ register, loading }: Props) => {
           </FormControl>
         </GridItem>
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading} isRequired={checkParentesco}>
             <FormLabel>Parentesco</FormLabel>
             <Select {...register("parentesco")} placeholder=" ">
               <option value={1}>Conjuge</option>
@@ -84,8 +88,11 @@ const CreateUserForm = ({ register, loading }: Props) => {
           <FormControl isRequired isDisabled={loading}>
             <FormLabel>Nascimento</FormLabel>
             <Input
-              {...register("nascimento")}
-              type="date"
+              {...register("nascimento", {
+                minLength: 10,
+              })}
+              as={InputMask}
+              mask="**/**/****"
               placeholder="Nascimento"
             />
           </FormControl>
@@ -100,8 +107,11 @@ const CreateUserForm = ({ register, loading }: Props) => {
           <FormControl isDisabled={loading}>
             <FormLabel>Data expedição RG</FormLabel>
             <Input
-              {...register("rgExpedicao")}
-              type="date"
+              {...register("rgExpedicao", {
+                minLength: 10,
+              })}
+              as={InputMask}
+              mask="**/**/****"
               placeholder="Data expedição RG"
             />
           </FormControl>
@@ -125,7 +135,15 @@ const CreateUserForm = ({ register, loading }: Props) => {
         <GridItem>
           <FormControl isDisabled={loading} isRequired>
             <FormLabel>CPF</FormLabel>
-            <Input {...register("cpf")} type="text" placeholder="CPF" />
+            <Input
+              {...register("cpf", {
+                minLength: 14,
+              })}
+              type="text"
+              placeholder="CPF"
+              as={InputMask}
+              mask="***.***.***-**"
+            />
           </FormControl>
         </GridItem>
         <GridItem>
@@ -142,8 +160,11 @@ const CreateUserForm = ({ register, loading }: Props) => {
           <FormControl isDisabled={loading}>
             <FormLabel>Data de adimissão</FormLabel>
             <Input
-              {...register("dataAdimissao")}
-              type="date"
+              {...register("dataAdimissao", {
+                minLength: 10,
+              })}
+              as={InputMask}
+              mask="**/**/****"
               placeholder="Data Adimissao"
             />
           </FormControl>
@@ -188,7 +209,15 @@ const CreateUserForm = ({ register, loading }: Props) => {
         <GridItem>
           <FormControl isDisabled={loading} isRequired>
             <FormLabel>CEP</FormLabel>
-            <Input {...register("cep")} type="text" placeholder="CEP" />
+            <Input
+              {...register("cep", {
+                minLength: 9,
+              })}
+              type="text"
+              placeholder="CEP"
+              as={InputMask}
+              mask="*****-***"
+            />
           </FormControl>
         </GridItem>
         <GridItem>
@@ -318,8 +347,11 @@ const CreateUserForm = ({ register, loading }: Props) => {
           <FormControl isDisabled={loading}>
             <FormLabel>Data Vigencia</FormLabel>
             <Input
-              {...register("dataVigencia")}
-              type="date"
+              {...register("dataVigencia", {
+                minLength: 10,
+              })}
+              as={InputMask}
+              mask="**/**/****"
               placeholder="Data Vigencia"
             />
           </FormControl>

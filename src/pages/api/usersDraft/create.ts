@@ -21,23 +21,8 @@ export default async function handler(
     data: {
       ...requestUser,
       companyId: company.id,
-      origemCarencia: Number(requestUser.origemCarencia),
-      parentesco: requestUser.parentesco
-        ? Number(requestUser.parentesco)
-        : null,
-      dataVigencia:
-        requestUser.dataVigencia && new Date(requestUser.dataVigencia),
-      dataCancelamento:
-        requestUser.dataCancelamento && new Date(requestUser.dataCancelamento),
-      dataObito: requestUser.dataObito && new Date(requestUser.dataObito),
-      dataAposentadoria:
-        requestUser.dataAposentadoria &&
-        new Date(requestUser.dataAposentadoria),
-      nascimento: requestUser.nascimento && new Date(requestUser.nascimento),
-      rgExpedicao: requestUser.rgExpedicao && new Date(requestUser.rgExpedicao),
-      dataAdimissao:
-        requestUser.dataAdimissao && new Date(requestUser.dataAdimissao),
-      plano: Number(requestUser.plano),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
       status: "I",
     },
   });

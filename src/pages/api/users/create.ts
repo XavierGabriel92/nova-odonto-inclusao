@@ -1,5 +1,3 @@
-import { Prisma } from "@prisma/client";
-import { request } from "http";
 import { NextApiRequest, NextApiResponse } from "next";
 import { decodeToken } from "../../../utils/decodeToken";
 import { prisma } from "../../../utils/prisma";
@@ -18,36 +16,16 @@ export default async function handler(
     },
   });
 
-  draftUsers = draftUsers.map((user) => ({
-    ...user,
-    companyId: company.id,
-    origemCarencia: Number(user.origemCarencia),
-    parentesco: user.parentesco ? Number(user.parentesco) : null,
-    dataVigencia: user.dataVigencia && new Date(user.dataVigencia),
-    dataCancelamento: user.dataCancelamento && new Date(user.dataCancelamento),
-    dataObito: user.dataObito && new Date(user.dataObito),
-    dataAposentadoria:
-      user.dataAposentadoria && new Date(user.dataAposentadoria),
-    nascimento: user.nascimento && new Date(user.nascimento),
-    rgExpedicao: user.rgExpedicao && new Date(user.rgExpedicao),
-    dataAdimissao: user.dataAdimissao && new Date(user.dataAdimissao),
-    plano: Number(user.plano),
-    status: "I",
-  }));
-
   draftUsers.forEach(async (user) => {
-    const { updatedAt, createdAt, id, ...rest } = user;
-    const newUser = await prisma.user.create({
+    const { id, ...rest } = user;
+    await prisma.user.create({
       data: {
         ...rest,
-      },
-    });
-
-    const logUser = await prisma.movimentacaoUser.create({
-      data: {
-        ...rest,
-        movimento: 1,
-        userId: newUser.id,
+        companyId: company.id,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        movimento: "1",
+        status: "I",
       },
     });
   });

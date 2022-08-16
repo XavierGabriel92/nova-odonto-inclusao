@@ -135,7 +135,9 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
                   <Tr key={user.id}>
                     <Td>{user.nome}</Td>
                     <Td>{user.matricula}</Td>
-                    <Td>{user.createdAt.toString()}</Td>
+                    <Td>
+                      {new Date(user.createdAt).toLocaleDateString("pt-br")}
+                    </Td>
                     <Td>{user.titular}</Td>
                     <Td>{user.nomeTitular}</Td>
                     <Td>{user.cpf}</Td>
@@ -199,7 +201,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      users: JSON.parse(JSON.stringify(users)),
+      users,
     },
   };
 };

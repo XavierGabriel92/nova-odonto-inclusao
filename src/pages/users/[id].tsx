@@ -31,7 +31,7 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { register, handleSubmit } = useForm<
+  const { register, handleSubmit, watch } = useForm<
     Omit<User, "companyId" | "status">
   >({
     defaultValues: {
@@ -83,7 +83,11 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
             Alterar Beneficiario
           </Heading>
           <form onSubmit={handleSubmit(handleUpdateUser)}>
-            <CreateUserForm register={register} loading={isLoading} />
+            <CreateUserForm
+              register={register}
+              loading={isLoading}
+              watch={watch}
+            />
             <Flex marginTop={4}>
               <Box>
                 <Button

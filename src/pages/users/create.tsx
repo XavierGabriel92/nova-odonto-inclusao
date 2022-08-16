@@ -24,7 +24,7 @@ const CreateUsersPage: NextPage = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit, reset } =
+  const { register, handleSubmit, watch } =
     useForm<Omit<User, "companyId" | "status">>();
 
   const handleSignIn = (data: Omit<User, "companyId" | "status">) => {
@@ -67,6 +67,7 @@ const CreateUsersPage: NextPage = () => {
             <CreateUserForm
               register={register}
               loading={loading}
+              watch={watch}
             ></CreateUserForm>
             <Flex marginTop={4}>
               <Box>

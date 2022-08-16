@@ -33,8 +33,6 @@ type Props = {
 };
 
 const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
-  console.log(users);
-  console.log(canceledeUsers);
   const router = useRouter();
   const toast = useToast();
 

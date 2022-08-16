@@ -30,7 +30,7 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
 
   const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit } = useForm<
+  const { register, handleSubmit, watch } = useForm<
     Omit<User, "companyId" | "status">
   >({
     defaultValues: {
@@ -82,7 +82,11 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
             Editar Beneficiario
           </Heading>
           <form onSubmit={handleSubmit(handleUpdateUser)}>
-            <CreateUserForm register={register} loading={loading} />
+            <CreateUserForm
+              register={register}
+              loading={loading}
+              watch={watch}
+            />
             <Flex marginTop={4}>
               <Box>
                 <Button
@@ -147,24 +151,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  let parseUser = JSON.parse(JSON.stringify(user));
-  parseUser = {
-    ...parseUser,
-    nascimento: parseUser.nascimento.slice(0, 10),
-    dataVigencia: parseUser.dataVigencia && parseUser.dataVigencia.slice(0, 10),
-    dataCancelamento:
-      parseUser.dataCancelamento && parseUser.dataCancelamento.slice(0, 10),
-    dataObito: parseUser.dataObito && parseUser.dataObito.slice(0, 10),
-    dataAposentadoria:
-      parseUser.dataAposentadoria && parseUser.dataAposentadoria.slice(0, 10),
-    rgExpedicao: parseUser.rgExpedicao && parseUser.rgExpedicao.slice(0, 10),
-    dataAdimissao:
-      parseUser.dataAdimissao && parseUser.dataAdimissao.slice(0, 10),
-  };
-
   return {
     props: {
-      user: parseUser,
+      user,
     },
   };
 };
