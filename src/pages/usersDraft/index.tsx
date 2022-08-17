@@ -117,11 +117,11 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
               <Thead>
                 <Tr>
                   <Th>Nome</Th>
-                  <Th>Matricula</Th>
+                  <Th>Matrícula</Th>
                   <Th>Data Cadastro</Th>
                   <Th>Categoria</Th>
                   <Th>Nome Titular</Th>
-                  <Th>Documentacao</Th>
+                  <Th>Documentação</Th>
                   <Th>Ação</Th>
                 </Tr>
               </Thead>

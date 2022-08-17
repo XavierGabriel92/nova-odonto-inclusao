@@ -70,11 +70,11 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
         </GridItem>
         <GridItem>
           <FormControl isRequired isDisabled={loading}>
-            <FormLabel>Matricula</FormLabel>
+            <FormLabel>Matrícula</FormLabel>
             <Input
               {...register("matricula")}
               type="text"
-              placeholder="Matricula"
+              placeholder="Matrícula"
             />
           </FormControl>
         </GridItem>

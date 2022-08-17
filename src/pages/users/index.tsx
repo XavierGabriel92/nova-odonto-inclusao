@@ -141,10 +141,10 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                 <Tr>
                   <Th>Status</Th>
                   <Th>Nome</Th>
-                  <Th>Matricula</Th>
+                  <Th>Matrícula</Th>
                   <Th>Data Cadastro</Th>
                   <Th>Categoria</Th>
-                  <Th>Documentacao</Th>
+                  <Th>Documentação</Th>
                   <Th>Ação</Th>
                 </Tr>
               </Thead>
@@ -214,10 +214,10 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                 <Tr>
                   <Th>Status</Th>
                   <Th>Nome</Th>
-                  <Th>Matricula</Th>
+                  <Th>Matrícula</Th>
                   <Th>Data Cadastro</Th>
                   <Th>Categoria</Th>
-                  <Th>Documentacao</Th>
+                  <Th>Documentação</Th>
                   <Th>Ação</Th>
                 </Tr>
               </Thead>
