@@ -43,7 +43,7 @@ const Header = () => {
                 {company?.name}
               </Text>
 
-              <Flex display={{ base: "none", md: "flex" }} ml={10}>
+              <Flex display="flex" ml={10}>
                 <Stack direction={"row"} spacing={4}>
                   <Box>
                     <Link
