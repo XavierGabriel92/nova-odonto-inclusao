@@ -131,7 +131,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
         >
           <Flex>
             <Heading as="h3" size="lg" marginBottom={6} p={4}>
-              Beneficiarios incluidos
+              Beneficiários incluidos
             </Heading>
             <Spacer />
           </Flex>
@@ -180,7 +180,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                                 mr={4}
                                 size="xs"
                                 buttonText="Cancelar"
-                                message="Deseja CANCELAR beneficiario?"
+                                message="Deseja CANCELAR beneficiário?"
                                 isLoading={isLoading}
                                 onClick={() => handleDeleteUser(user.id)}
                               />
@@ -204,7 +204,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
         >
           <Flex>
             <Heading as="h3" size="lg" marginBottom={6} p={4}>
-              Beneficiarios cancelados
+              Beneficiários cancelados
             </Heading>
             <Spacer />
           </Flex>
@@ -239,8 +239,8 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                                 buttonColor="red"
                                 mr={4}
                                 size="xs"
-                                buttonText="Ativar beneficiario"
-                                message="Deseja ATIVAR beneficiario?"
+                                buttonText="Ativar beneficiário"
+                                message="Deseja ATIVAR beneficiário?"
                                 isLoading={isLoading}
                                 onClick={() => handleActiveUser(user.id)}
                               />

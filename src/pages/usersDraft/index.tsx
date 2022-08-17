@@ -91,7 +91,7 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
         >
           <Flex>
             <Heading as="h3" size="lg" marginBottom={6} p={4}>
-              Inclusão de Beneficiario
+              Inclusão de Beneficiário
             </Heading>
             <Spacer />
             <Box p="4">
@@ -99,7 +99,7 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
                 buttonColor="orange"
                 mr={4}
                 buttonText="Enviar lista para inclusão"
-                message="Deseja enviar beneficiarios para inclusão?"
+                message="Deseja enviar beneficiários para inclusão?"
                 onClick={handleCreateUsers}
               />
               <Button
@@ -108,7 +108,7 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
                 size="sm"
                 onClick={() => router.push("/usersDraft/create")}
               >
-                Incluir novo usuário
+                Incluir novo Beneficiário
               </Button>
             </Box>
           </Flex>
@@ -158,7 +158,7 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
                             mr={4}
                             size="xs"
                             buttonText="Remover"
-                            message="Deseja Remover beneficiario da lista de inclusão?"
+                            message="Deseja Remover beneficiário da lista de inclusão?"
                             isLoading={isLoading}
                             onClick={() => handleDeleteUser(user.id)}
                           />

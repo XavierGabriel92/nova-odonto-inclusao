@@ -61,7 +61,7 @@ const CreateUsersPage: NextPage = () => {
           padding={4}
         >
           <Heading as="h3" size="lg" marginBottom={6}>
-            Inclusão de Beneficiario
+            Inclusão de Beneficiário
           </Heading>
           <form onSubmit={handleSubmit(handleSignIn)}>
             <CreateUserForm

@@ -80,7 +80,7 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
           padding={4}
         >
           <Heading as="h3" size="lg" marginBottom={6}>
-            Alterar Beneficiario
+            Alterar Beneficiário
           </Heading>
           <form onSubmit={handleSubmit(handleUpdateUser)}>
             <CreateUserForm

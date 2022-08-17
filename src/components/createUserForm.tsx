@@ -31,7 +31,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
           <FormControl isRequired isDisabled={loading}>
             <FormLabel>Titular</FormLabel>
             <Select {...register("titular")}>
-              <option value="B">Beneficiario</option>
+              <option value="B">Beneficiário</option>
               <option value="D">Dependente</option>
             </Select>
           </FormControl>
