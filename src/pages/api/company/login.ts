@@ -8,10 +8,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const { cpnj, password } = req.body as Prisma.CompanyWhereInput;
+    const { cnpj, password } = req.body as Prisma.CompanyWhereInput;
     const company = await prisma.company.findFirstOrThrow({
       where: {
-        cpnj,
+        cnpj,
       },
     });
 
@@ -28,7 +28,7 @@ export default async function handler(
     });
   } catch (e) {
     res.status(404).json({
-      msg: "Cpnj/password invalidos",
+      msg: "CNPJ/password invalidos",
     });
   }
 }

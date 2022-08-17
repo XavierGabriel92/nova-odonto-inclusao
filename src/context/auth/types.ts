@@ -14,6 +14,6 @@ export type AuthContextProps = {
 };
 
 export type AuthBodyRequest = {
-  cpnj: string;
+  cnpj: string;
   password: string;
 };

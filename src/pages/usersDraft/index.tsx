@@ -47,17 +47,15 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
       .then(() => {
         setFilterUsers((oldState) => oldState.filter((user) => user.id !== id));
       })
-      .catch(() =>
+      .catch(() => {
+        setIsLoading(false);
         toast({
           title: "Falha ao deletar usuario",
           description: "Falha ao deletar usuario",
           status: "error",
           duration: 3000,
           isClosable: true,
-        })
-      )
-      .finally(() => {
-        setIsLoading(false);
+        });
       });
   };
 
@@ -69,17 +67,15 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
       .then(() => {
         router.push("/users");
       })
-      .catch(() =>
+      .catch(() => {
+        setIsLoading(false);
         toast({
           title: "Falha ao incluir usuarios",
           description: "Falha ao incluir usuarios",
           status: "error",
           duration: 3000,
           isClosable: true,
-        })
-      )
-      .finally(() => {
-        setIsLoading(false);
+        });
       });
   };
 
@@ -148,9 +144,10 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
                             colorScheme="blue"
                             size="xs"
                             isLoading={isLoading}
-                            onClick={() =>
-                              router.push(`/usersDraft/${user.id}`)
-                            }
+                            onClick={() => {
+                              setIsLoading(true);
+                              router.push(`/usersDraft/${user.id}`);
+                            }}
                           >
                             Editar
                           </Button>

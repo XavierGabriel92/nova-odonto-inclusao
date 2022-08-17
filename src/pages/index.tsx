@@ -68,9 +68,9 @@ const Home: NextPage = () => {
                     <CFaUserAlt color="gray.300" />
                   </InputLeftElement>
                   <Input
-                    {...register("cpnj")}
+                    {...register("cnpj")}
                     type="text"
-                    placeholder="CPNJ"
+                    placeholder="CNPJ"
                     isRequired
                     isDisabled={loading}
                   />

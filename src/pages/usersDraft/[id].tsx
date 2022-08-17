@@ -54,16 +54,16 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
         });
         router.push("/usersDraft");
       })
-      .catch(() =>
+      .catch(() => {
+        setLoading(false);
         toast({
           title: "Falha ao atualizar usuario",
           description: "Falha ao atualizar usuario",
           status: "error",
           duration: 3000,
           isClosable: true,
-        })
-      )
-      .finally(() => setLoading(false));
+        });
+      });
   };
 
   return (

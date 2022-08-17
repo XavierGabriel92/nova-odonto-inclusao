@@ -29,16 +29,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
         });
         router.push("/users");
       })
-      .catch(() =>
+      .catch(() => {
+        setLoading(false);
         toast({
           title: "Falha ao realizar login",
           description: "CNPJ/Senha incorreto",
           status: "error",
           duration: 3000,
           isClosable: true,
-        })
-      )
-      .finally(() => setLoading(false));
+        });
+      });
   }
 
   const singOut = () => {

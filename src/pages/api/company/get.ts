@@ -17,7 +17,7 @@ export default async function handler(
     throw Error("Cant find token");
   } catch (e) {
     res.status(404).json({
-      msg: "Cpnj/password invalidos",
+      msg: "CNPJ/password invalidos",
     });
   }
 }

@@ -166,7 +166,10 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                                 colorScheme="blue"
                                 size="xs"
                                 isLoading={isLoading}
-                                onClick={() => router.push(`/users/${user.id}`)}
+                                onClick={() => {
+                                  setIsLoading(true);
+                                  router.push(`/users/${user.id}`);
+                                }}
                               >
                                 Alterar
                               </Button>

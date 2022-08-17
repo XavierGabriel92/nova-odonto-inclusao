@@ -36,16 +36,16 @@ const CreateUsersPage: NextPage = () => {
       .then(() => {
         router.push("/users");
       })
-      .catch(() =>
+      .catch(() => {
+        setLoading(false);
         toast({
           title: "Falha ao criar usuario",
           description: "Falha ao criar usuario",
           status: "error",
           duration: 3000,
           isClosable: true,
-        })
-      )
-      .finally(() => setLoading(false));
+        });
+      });
   };
 
   return (
