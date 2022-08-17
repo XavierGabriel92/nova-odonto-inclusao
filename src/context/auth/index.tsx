@@ -27,7 +27,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setCookie(undefined, "nextauth.token", token, {
           maxAge: 60 * 60 * 24 * 30, // 30 days
         });
-        router.push("/users");
+        router.replace("/users").finally(() => {
+          setLoading(false);
+        });
       })
       .catch(() => {
         setLoading(false);

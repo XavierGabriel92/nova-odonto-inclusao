@@ -55,11 +55,11 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
         });
         router.push("/users");
       })
-      .catch(() => {
+      .catch(({ response }) => {
         setIsLoading(false);
         toast({
           title: "Falha ao alterar usuario",
-          description: "Falha ao alterar usuario",
+          description: response.data.message,
           status: "error",
           duration: 3000,
           isClosable: true,

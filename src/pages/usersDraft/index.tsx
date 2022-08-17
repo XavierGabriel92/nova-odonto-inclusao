@@ -194,6 +194,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     where: {
       companyId: company.id,
     },
+    distinct: ["cpf"],
   });
 
   return {

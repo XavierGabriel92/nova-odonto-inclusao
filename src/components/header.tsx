@@ -50,12 +50,8 @@ const Header = () => {
                       p={2}
                       href="/users"
                       fontSize="sm"
-                      fontWeight={500}
+                      fontWeight={700}
                       color="white"
-                      _hover={{
-                        textDecoration: "none",
-                        fontWeight: 700,
-                      }}
                     >
                       Beneficiarios incluidos
                     </Link>
@@ -65,12 +61,8 @@ const Header = () => {
                       p={2}
                       href="/usersDraft"
                       fontSize="sm"
-                      fontWeight={500}
+                      fontWeight={700}
                       color="white"
-                      _hover={{
-                        textDecoration: "none",
-                        fontWeight: 700,
-                      }}
                     >
                       Incluir beneficiarios
                     </Link>

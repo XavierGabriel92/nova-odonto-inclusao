@@ -8,25 +8,43 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { authorization } = req.headers;
-  if (!authorization) throw Error("Cant find token");
-  var company = decodeToken({ authorization });
+  try {
+    const { authorization } = req.headers;
+    if (!authorization) throw Error("Cant find token");
+    var company = decodeToken({ authorization });
 
-  const requestUser = req.body;
+    const requestUser = req.body;
 
-  const user = await prisma.userDraft.update({
-    where: {
-      id: requestUser.id,
-    },
-    data: {
-      ...requestUser,
-      updatedAt: new Date().toISOString(),
-      status: "I",
-    },
-  });
+    const checkUser = await prisma.userDraft.findFirst({
+      where: {
+        cpf: requestUser.cpf,
+        companyId: company.id,
+      },
+    });
 
-  return res.status(200).json({
-    msg: "User updated",
-    user,
-  });
+    if (checkUser)
+      throw new Error("Usuario ja existe", {
+        cause: 400,
+      });
+
+    const user = await prisma.userDraft.update({
+      where: {
+        id: requestUser.id,
+      },
+      data: {
+        ...requestUser,
+        updatedAt: new Date().toISOString(),
+        status: "I",
+      },
+    });
+
+    return res.status(200).json({
+      msg: "User updated",
+      user,
+    });
+  } catch (e: any) {
+    return res.status(400).json({
+      message: e.message || "Falha ao atualizar usuario",
+    });
+  }
 }

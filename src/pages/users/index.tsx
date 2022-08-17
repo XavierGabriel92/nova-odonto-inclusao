@@ -279,6 +279,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       companyId: company.id,
       AND: [{ status: { not: "E" } }, { status: { not: "SR" } }],
     },
+    distinct: ["cpf"],
   });
 
   const canceledeUsers = await prisma.user.findMany({
@@ -286,12 +287,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       companyId: company.id,
       OR: [{ status: { in: "E" } }, { status: { in: "SR" } }],
     },
+    distinct: ["cpf"],
   });
 
   return {
     props: {
-      users: JSON.parse(JSON.stringify(users)),
-      canceledeUsers: JSON.parse(JSON.stringify(canceledeUsers)),
+      users: users,
+      canceledeUsers: canceledeUsers,
     },
   };
 };

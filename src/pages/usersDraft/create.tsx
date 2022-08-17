@@ -36,11 +36,11 @@ const CreateUsersPage: NextPage = () => {
       .then(() => {
         router.push("/usersDraft");
       })
-      .catch(() => {
+      .catch(({ response }) => {
         setLoading(false);
         toast({
           title: "Falha ao criar usuario",
-          description: "Falha ao criar usuario",
+          description: response.data.message,
           status: "error",
           duration: 3000,
           isClosable: true,
