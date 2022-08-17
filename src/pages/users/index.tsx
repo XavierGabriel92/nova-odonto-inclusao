@@ -143,7 +143,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                   <Th>Nome</Th>
                   <Th>Matricula</Th>
                   <Th>Data Cadastro</Th>
-                  <Th>Dependente</Th>
+                  <Th>Categoria</Th>
                   <Th>Documentacao</Th>
                   <Th>Ação</Th>
                 </Tr>
@@ -155,7 +155,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                     <Td>{user.nome}</Td>
                     <Td>{user.matricula}</Td>
                     <Td>{user.createdAt.toString()}</Td>
-                    <Td>{user.titular}</Td>
+                    <Td>{user.titular === "B" ? "Titular" : "Dependente"}</Td>
                     <Td>{user.cpf}</Td>
                     <Td>
                       <Flex>
@@ -216,7 +216,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                   <Th>Nome</Th>
                   <Th>Matricula</Th>
                   <Th>Data Cadastro</Th>
-                  <Th>Dependente</Th>
+                  <Th>Categoria</Th>
                   <Th>Documentacao</Th>
                   <Th>Ação</Th>
                 </Tr>
@@ -228,7 +228,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                     <Td>{user.nome}</Td>
                     <Td>{user.matricula}</Td>
                     <Td>{user.createdAt.toString()}</Td>
-                    <Td>{user.titular}</Td>
+                    <Td>{user.titular === "B" ? "Titular" : "Dependente"}</Td>
                     <Td>{user.cpf}</Td>
                     <Td>
                       <Flex>

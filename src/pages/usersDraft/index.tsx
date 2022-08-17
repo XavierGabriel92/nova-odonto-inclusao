@@ -119,8 +119,8 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
                   <Th>Nome</Th>
                   <Th>Matricula</Th>
                   <Th>Data Cadastro</Th>
-                  <Th>Titular</Th>
-                  <Th>Nome Tiular</Th>
+                  <Th>Categoria</Th>
+                  <Th>Nome Titular</Th>
                   <Th>Documentacao</Th>
                   <Th>Ação</Th>
                 </Tr>
@@ -134,7 +134,7 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
                     <Td>
                       {new Date(user.createdAt).toLocaleDateString("pt-br")}
                     </Td>
-                    <Td>{user.titular}</Td>
+                    <Td>{user.titular === "B" ? "Titular" : "Dependente"}</Td>
                     <Td>{user.nomeTitular}</Td>
                     <Td>{user.cpf}</Td>
                     <Td>
