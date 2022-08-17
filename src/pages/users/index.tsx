@@ -131,7 +131,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
         >
           <Flex>
             <Heading as="h3" size="lg" marginBottom={6} p={4}>
-              Beneficiários incluidos
+              Beneficiários incluídos
             </Heading>
             <Spacer />
           </Flex>

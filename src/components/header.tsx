@@ -53,7 +53,7 @@ const Header = () => {
                       fontWeight={700}
                       color="white"
                     >
-                      Beneficiários incluidos
+                      Beneficiários incluídos
                     </Link>
                   </Box>
                   <Box>
