@@ -25,10 +25,7 @@ export default async function handler(
       },
     });
 
-    if (checkUser)
-      throw new Error("Usuario ja existe", {
-        cause: 400,
-      });
+    if (checkUser) throw new Error("Usuario ja existe");
 
     const user = await prisma.userDraft.create({
       data: {
