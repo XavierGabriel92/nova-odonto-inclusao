@@ -76,6 +76,15 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
       });
   };
 
+  const parseDate = (date: string) => {
+    if (new Date(date).toString() == "Invalid Date") {
+      const splitedDate = date.split("/");
+      const newDate = `${splitedDate[2]}/${splitedDate[1]}/${splitedDate[0]}`;
+      return new Date(newDate).toLocaleDateString("pt-br");
+    }
+    return new Date(date).toLocaleDateString("pt-br");
+  };
+
   const handleActiveUser = (id: number) => {
     setIsLoading(true);
     const data = {
@@ -154,7 +163,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                     <Td>{updateStatus(user.status)}</Td>
                     <Td>{user.nome}</Td>
                     <Td>{user.matricula}</Td>
-                    <Td>{user.createdAt.toString()}</Td>
+                    <Td>{parseDate(user.createdAt)}</Td>
                     <Td>{user.titular === "B" ? "Titular" : "Dependente"}</Td>
                     <Td>{user.cpf}</Td>
                     <Td>
@@ -227,7 +236,9 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                     <Td>{updateStatus(user.status)}</Td>
                     <Td>{user.nome}</Td>
                     <Td>{user.matricula}</Td>
-                    <Td>{user.createdAt.toString()}</Td>
+                    <Td>
+                      {new Date(user.createdAt).toLocaleDateString("pt-br")}
+                    </Td>
                     <Td>{user.titular === "B" ? "Titular" : "Dependente"}</Td>
                     <Td>{user.cpf}</Td>
                     <Td>

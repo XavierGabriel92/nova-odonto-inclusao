@@ -30,7 +30,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
         <GridItem>
           <FormControl isRequired isDisabled={loading}>
             <FormLabel>Titular</FormLabel>
-            <Select {...register("titular")}>
+            <Select {...register("titular")} placeholder=" ">
               <option value="B">Beneficiário</option>
               <option value="D">Dependente</option>
             </Select>
@@ -172,7 +172,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
         <GridItem>
           <FormControl isDisabled={loading} isRequired>
             <FormLabel>Estado Civil</FormLabel>
-            <Select {...register("estadoCivil")}>
+            <Select {...register("estadoCivil")} placeholder=" ">
               <option value="C">Casado(a)</option>
               <option value="O">Outros</option>
               <option value="S">Solteiro(a)</option>
@@ -261,7 +261,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
         <GridItem>
           <FormControl isDisabled={loading} isRequired>
             <FormLabel>Estado</FormLabel>
-            <Select {...register("estado")}>
+            <Select {...register("estado")} placeholder=" ">
               <option value="MG">Minha Gerais</option>
               <option value="SP">São Paulo</option>
               <option value="AC">Acre</option>
@@ -325,7 +325,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
           <GridItem>
             <FormControl isDisabled={loading} isRequired>
               <FormLabel>Plano</FormLabel>
-              <Select {...register("plano")}>
+              <Select {...register("plano")} placeholder=" ">
                 <option value={1}>Platinum</option>
                 <option value={2}>Ouro</option>
               </Select>
