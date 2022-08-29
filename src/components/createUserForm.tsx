@@ -137,7 +137,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
             <FormLabel>CPF</FormLabel>
             <Input
               {...register("cpf", {
-                minLength: 14,
+                minLength: 11,
               })}
               type="text"
               placeholder="CPF"
@@ -211,7 +211,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
             <FormLabel>CEP</FormLabel>
             <Input
               {...register("cep", {
-                minLength: 9,
+                minLength: 8,
               })}
               type="text"
               placeholder="CEP"
@@ -328,6 +328,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
               <Select {...register("plano")} placeholder=" ">
                 <option value={1}>Platinum</option>
                 <option value={2}>Ouro</option>
+                <option value={3}>Onix</option>
               </Select>
             </FormControl>
           </GridItem>
