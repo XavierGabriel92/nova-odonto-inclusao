@@ -65,6 +65,13 @@ const ListUsersPage: NextPage<Props> = ({ users }: Props) => {
     api
       .post("/api/users/create", {})
       .then(() => {
+        toast({
+          title: "Beneficiarios enviados com sucesso",
+          description: "Beneficiarios enviados com sucesso",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
         router.push("/users");
       })
       .catch(() => {
