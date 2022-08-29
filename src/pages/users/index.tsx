@@ -33,6 +33,7 @@ type Props = {
 };
 
 const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
+  console.log(users);
   const router = useRouter();
   const toast = useToast();
 
@@ -94,12 +95,12 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
     api
       .post("/api/users/active", data)
       .then(() => {
-        setFilterCanceldeUsers((oldState) =>
+        setFilterUsers((oldState) =>
           oldState.map((user) => {
             if (user.id == id) {
               return {
                 ...user,
-                status: "SR",
+                status: "A",
               };
             }
             return user;
@@ -196,6 +197,20 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                             </Box>
                           </>
                         )}
+                        {user.status === "SE" && (
+                          <>
+                            <Box marginRight="4">
+                              <Button
+                                colorScheme="red"
+                                size="xs"
+                                isLoading={isLoading}
+                                onClick={() => handleActiveUser(user.id)}
+                              >
+                                Cancelar exclusão
+                              </Button>
+                            </Box>
+                          </>
+                        )}
                       </Flex>
                     </Td>
                   </Tr>
@@ -227,7 +242,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                   <Th>Data Cadastro</Th>
                   <Th>Categoria</Th>
                   <Th>Documentação</Th>
-                  <Th>Ação</Th>
+                  <Th></Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -241,25 +256,7 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                     </Td>
                     <Td>{user.titular === "B" ? "Titular" : "Dependente"}</Td>
                     <Td>{user.cpf}</Td>
-                    <Td>
-                      <Flex>
-                        {user.status !== "SR" && (
-                          <>
-                            <Box>
-                              <ConfirmationModal
-                                buttonColor="red"
-                                mr={4}
-                                size="xs"
-                                buttonText="Ativar beneficiário"
-                                message="Deseja ATIVAR beneficiário?"
-                                isLoading={isLoading}
-                                onClick={() => handleActiveUser(user.id)}
-                              />
-                            </Box>
-                          </>
-                        )}
-                      </Flex>
-                    </Td>
+                    <Td></Td>
                   </Tr>
                 ))}
               </Tbody>

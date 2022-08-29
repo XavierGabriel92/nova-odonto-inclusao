@@ -18,11 +18,11 @@ export default async function handler(
     },
     data: {
       updatedAt: new Date().toISOString(),
-      status: "SA",
+      status: "A",
     },
   });
 
   return res.status(200).json({
-    msg: "User deleted",
+    msg: "User activated",
   });
 }

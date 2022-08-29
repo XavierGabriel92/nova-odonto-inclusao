@@ -20,7 +20,8 @@ export default async function handler(
       },
     });
 
-    if (checkUser) throw new Error("Usuario ja existe");
+    const existUser = checkUser.id == requestUser.id;
+    if (!existUser) throw new Error("Usuario ja existe");
 
     await prisma.user.update({
       where: {

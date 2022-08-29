@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import ConfirmationModal from "../../components/confirmationModal";
 import CreateUserForm from "../../components/createUserForm";
 import Header from "../../components/header";
 import { api } from "../../utils/axios";
