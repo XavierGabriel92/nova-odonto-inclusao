@@ -202,6 +202,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       companyId: company.id,
     },
     distinct: ["cpf"],
+    orderBy: [{ titular: "asc" }, { nome: "asc" }, { matricula: "asc" }],
   });
 
   return {
