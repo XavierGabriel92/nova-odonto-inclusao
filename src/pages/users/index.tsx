@@ -288,7 +288,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       AND: [{ status: { not: "E" } }, { status: { not: "SR" } }],
     },
     distinct: ["cpf"],
-    orderBy: [{ titular: "asc" }, { nome: "asc" }, { matricula: "asc" }],
+    orderBy: [{ nome: "asc" }, { matricula: "asc" }],
   });
 
   const canceledeUsers = await prisma.user.findMany({
