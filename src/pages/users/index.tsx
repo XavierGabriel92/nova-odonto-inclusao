@@ -169,34 +169,36 @@ const ListUsersPage: NextPage<Props> = ({ users, canceledeUsers }: Props) => {
                     <Td>{user.cpf}</Td>
                     <Td>
                       <Flex>
-                        {user.status !== "SA" && user.status !== "SE" && (
-                          <>
-                            <Box marginRight="4">
-                              <Button
-                                colorScheme="blue"
-                                size="xs"
-                                isLoading={isLoading}
-                                onClick={() => {
-                                  setIsLoading(true);
-                                  router.push(`/users/${user.id}`);
-                                }}
-                              >
-                                Alterar
-                              </Button>
-                            </Box>
-                            <Box>
-                              <ConfirmationModal
-                                buttonColor="red"
-                                mr={4}
-                                size="xs"
-                                buttonText="Cancelar"
-                                message="Deseja CANCELAR beneficiário?"
-                                isLoading={isLoading}
-                                onClick={() => handleDeleteUser(user.id)}
-                              />
-                            </Box>
-                          </>
-                        )}
+                        {user.status !== "SA" &&
+                          user.status !== "SE" &&
+                          user.status !== "I" && (
+                            <>
+                              <Box marginRight="4">
+                                <Button
+                                  colorScheme="blue"
+                                  size="xs"
+                                  isLoading={isLoading}
+                                  onClick={() => {
+                                    setIsLoading(true);
+                                    router.push(`/users/${user.id}`);
+                                  }}
+                                >
+                                  Alterar
+                                </Button>
+                              </Box>
+                              <Box>
+                                <ConfirmationModal
+                                  buttonColor="red"
+                                  mr={4}
+                                  size="xs"
+                                  buttonText="Cancelar"
+                                  message="Deseja CANCELAR beneficiário?"
+                                  isLoading={isLoading}
+                                  onClick={() => handleDeleteUser(user.id)}
+                                />
+                              </Box>
+                            </>
+                          )}
                         {user.status === "SE" && (
                           <>
                             <Box marginRight="4">

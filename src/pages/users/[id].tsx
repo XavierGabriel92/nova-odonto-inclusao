@@ -86,6 +86,7 @@ const UpdateUserPage: NextPage<Props> = ({ user }: Props) => {
               register={register}
               loading={isLoading}
               watch={watch}
+              disableFields
             />
             <Flex marginTop={4}>
               <Box>

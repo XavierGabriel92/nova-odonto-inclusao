@@ -14,9 +14,10 @@ type Props = {
   register: UseFormRegister<Omit<User, "companyId" | "status">>;
   loading: boolean;
   watch?: (params: any) => any;
+  disableFields?: boolean;
 };
 
-const CreateUserForm = ({ register, loading, watch }: Props) => {
+const CreateUserForm = ({ register, loading, watch, disableFields }: Props) => {
   const checkParentesco = watch("titular") === "D";
 
   const spacing = 4;
@@ -98,13 +99,13 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
           </FormControl>
         </GridItem>
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>RG</FormLabel>
             <Input {...register("rg")} type="text" placeholder="RG" />
           </FormControl>
         </GridItem>
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>Data expedição RG</FormLabel>
             <Input
               {...register("rgExpedicao", {
@@ -117,7 +118,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
           </FormControl>
         </GridItem>
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>Emissor RG</FormLabel>
             <Input
               {...register("rgEmissor")}
@@ -127,7 +128,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
           </FormControl>
         </GridItem>
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>UF RG</FormLabel>
             <Input {...register("rgUf")} type="text" placeholder="UF RG" />
           </FormControl>
@@ -157,7 +158,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
         </GridItem>
 
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>Data de adimissão</FormLabel>
             <Input
               {...register("dataAdimissao", {
@@ -237,7 +238,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
           </FormControl>
         </GridItem>
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>Complemento</FormLabel>
             <Input
               {...register("complemento")}
@@ -298,19 +299,19 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
         marginBottom={spacing * 2}
       >
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>Telefone</FormLabel>
             <Input {...register("fone")} type="text" placeholder="Telefone" />
           </FormControl>
         </GridItem>
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>Email</FormLabel>
             <Input {...register("email")} type="text" placeholder="Email" />
           </FormControl>
         </GridItem>
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>Celular</FormLabel>
             <Input {...register("celular")} type="text" placeholder="Celular" />
           </FormControl>
@@ -335,7 +336,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
         </GridItem>
 
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>Doenças Pré-Existentes</FormLabel>
             <Select {...register("doencasPre")} placeholder=" ">
               <option value="N">Não tem</option>
@@ -345,7 +346,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
           </FormControl>
         </GridItem>
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>Data Vigencia</FormLabel>
             <Input
               {...register("dataVigencia", {
@@ -359,14 +360,14 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
         </GridItem>
 
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>CNS</FormLabel>
             <Input {...register("cns")} type="text" placeholder="CNS" />
           </FormControl>
         </GridItem>
 
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>Doenças Pré-Existentes</FormLabel>
             <Select {...register("origemCarencia")}>
               <option value={1}>ORIGEM DE CARENCIA ISENTO</option>
@@ -385,7 +386,7 @@ const CreateUserForm = ({ register, loading, watch }: Props) => {
           </FormControl>
         </GridItem>
         <GridItem>
-          <FormControl isDisabled={loading}>
+          <FormControl isDisabled={loading || disableFields}>
             <FormLabel>CID</FormLabel>
             <Input {...register("cid")} type="text" placeholder="CID" />
           </FormControl>
