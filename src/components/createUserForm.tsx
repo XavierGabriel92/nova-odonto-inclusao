@@ -150,7 +150,7 @@ const CreateUserForm = ({ register, loading, watch, disableFields }: Props) => {
         <GridItem>
           <FormControl isDisabled={loading} isRequired>
             <FormLabel>Sexo</FormLabel>
-            <Select {...register("sexo")}>
+            <Select {...register("sexo")} placeholder=" ">
               <option value="M">Masculino</option>
               <option value="F">Feminino</option>
             </Select>
