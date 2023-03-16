@@ -16,19 +16,21 @@ export default async function handler(
     },
   });
 
-  draftUsers.forEach(async (user) => {
-    const { id, ...rest } = user;
-    await prisma.user.create({
-      data: {
-        ...rest,
-        companyId: company.id,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        movimento: "1",
-        status: "I",
-      },
-    });
-  });
+  await Promise.all(
+    draftUsers.map(async (user) => {
+      const { id, ...rest } = user;
+      return await prisma.user.create({
+        data: {
+          ...rest,
+          companyId: company.id,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          movimento: "1",
+          status: "I",
+        },
+      });
+    })
+  );
 
   await prisma.userDraft.deleteMany({
     where: {
